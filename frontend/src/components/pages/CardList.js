@@ -32,7 +32,7 @@ export default function CardList() {
     }, [setCards])
 
   return (
-    <Container component="main" sx={{ my: 16 }} maxWidth="lg">
+    <Container component="main" sx={{ mt: 16, mb: 'auto' }} maxWidth="lg">
         <Grid container spacing={2}>
 
             {cards ? cards.map((card) => (
