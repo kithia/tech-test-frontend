@@ -20,7 +20,7 @@ export default function CardList() {
                 return response.json();
             })
             .then((data) => {
-                setCards(data);
+                setCards(data.Products);
             })
             .catch((error) => {
                 console.log(error);
