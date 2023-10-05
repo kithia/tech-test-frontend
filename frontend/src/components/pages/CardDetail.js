@@ -12,6 +12,8 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 
+import './../../styles/CardDetail.css';
+
 /**
  * Functional component for the details of a given card
  * @returns The JSX representation of the component
@@ -67,10 +69,16 @@ export default function CardDetail() {
 
 }, [setCardDetail, setCardSizes, setIsLoading, setIsError, cardDetail, id])
 
+  /**
+   * 
+   */
   function handleOnMouseEnter() {
     setIsHovering(true);
   } 
 
+  /**
+   * 
+   */
   function handleOnMouseLeave() {
     setIsHovering(false);
   }
@@ -80,8 +88,8 @@ export default function CardDetail() {
       {/** 
        * Loading circle upon component load
        */}
-      {isLoading ? <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress className='mx-auto' />
+      {isLoading ? <Box className="centerBox">
+            <CircularProgress />
         </Box> : <></>}
 
       {/** 
@@ -92,7 +100,7 @@ export default function CardDetail() {
        * status, and give a more appropriate, specific 
        * error message to the user
        */}
-      {isError ? <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      {isError ? <Box className="centerBox">
           <Typography variant="h2" gutterBottom>
               Sorry, it seems this item does not exist
           </Typography>
@@ -124,7 +132,7 @@ export default function CardDetail() {
                 </i>
               </Typography>
 
-              <p sx={{ pb: '2rem' }}>
+              <p>
                 {cardDetail.Description}
               </p>
 
