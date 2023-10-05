@@ -37,6 +37,7 @@ function Footer() {
         sx={{
         py: 3,
         px: 2,
+        mt: 'auto',
         backgroundColor: (theme) =>
             theme.palette.mode === 'light'
             ? theme.palette.grey[200]

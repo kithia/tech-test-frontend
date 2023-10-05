@@ -20,9 +20,13 @@ export default function CardDetail() {
 
   // Functional states
   const [cardDetail, setCardDetail] = useState(null);
+  const [cardSizes, setCardSizes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [documentTitle, setDocumentTitle] = useState('Moonpig')
+
+  const [documentTitle, setDocumentTitle] = useState('Moonpig');
+
+  const [isHovering, setIsHovering] = useState(false);
 
   // MoonpigProductId taken from URL parameters
   const { id } = useParams();
@@ -40,6 +44,7 @@ export default function CardDetail() {
         })
         .then((data) => {
           setCardDetail(data);
+          setCardSizes(data.AvailableSizes);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -56,10 +61,18 @@ export default function CardDetail() {
       setDocumentTitle(`${cardDetail.Title} | Moonpig`);
     }
 
-}, [setCardDetail, setIsLoading, setIsError, cardDetail, id])
+}, [setCardDetail, setCardSizes, setIsLoading, setIsError, cardDetail, id])
+
+  function handleOnMouseEnter() {
+    setIsHovering(true);
+  } 
+
+  function handleOnMouseLeave() {
+    setIsHovering(false);
+  }
 
   return (
-    <Container component="main" sx={{ mt: 12, mb:'auto' }} maxWidth="lg">
+    <Container component="main" sx={{ my: 12 }} maxWidth="lg">
       {/** 
        * Loading circle upon component load
        */}
@@ -84,23 +97,56 @@ export default function CardDetail() {
       {/**
        * Card details
        */}
-      {cardDetail ? <Grid container spacing={2}>
+      {cardDetail ? <Grid container spacing={1}>
 
-          <Grid item xs={12} sm={6}>
-              <Card raised={true} sx={{ width: '300px', height: 'auto', margin: 'auto' }}>
+          <Grid item sm={12} md={6} sx={{ paddingBottom: '3rem' }}>
+              <Card raised={true} sx={{ width: '320px', height: 'auto', margin: 'auto' }}>
                   <CardMedia
                   component="img"
-                  src={cardDetail.ImageUrls[0].ImageUrl} />
+                  src={isHovering ? cardDetail.ImageUrls[3].ImageUrl : cardDetail.ImageUrls[0].ImageUrl}
+                  onMouseEnter={handleOnMouseEnter}
+                  onMouseLeave={handleOnMouseLeave} />
               </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} sx={{ position: 'relative' }}>
-            <Typography variant="h4">
-              {cardDetail.Title}
-            </Typography>
+          <Grid item sm={12} md={6} sx={{ position: 'relative' }}>
+              <Typography variant="h3" sx={{ paddingBottom: '1.5rem' }}>
+                {cardDetail.Title}
+              </Typography>
 
-            <Button variant="contained" size="large"
-            sx={{ bottom: 0, position: 'absolute' }}>Buy Me</Button>
+              <Typography variant="h5">
+                <i>
+                {cardDetail.ProductCategoryGroup.Name}
+                </i>
+              </Typography>
+
+              <p sx={{ paddingBottom: '1.5rem' }}>
+                {cardDetail.Description}
+              </p>
+
+              {cardSizes ? <div>
+                <Typography variant="h5" >
+                  Available sizes:
+                </Typography>
+
+                <Box sx={{ marginTop: '1rem', maxHeight: '200px', overflowY: 'auto' }}>
+
+                {cardSizes.map((size) => (
+                    <Box key={size.Id} sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <Typography variant='h4'>
+                        {size.DisplayName}
+                      </Typography>
+                      <Typography variant='h4'>
+                        {`${size.Currency} ${size.Price}`}
+                      </Typography>
+                    </Box>
+                  ))}
+
+                </Box>
+              </div> : <></>}
+
+            <Button variant="outlined" size="large"
+            sx={{ bottom: 0, position: 'relative' }}>Buy Me</Button>
           </Grid>
 
         </Grid> : <></>}

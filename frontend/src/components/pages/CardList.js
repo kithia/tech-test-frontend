@@ -90,7 +90,7 @@ export default function CardList() {
                             height="307"
                             width="217"
                             sx={{ width: '100%', height: 'auto' }}
-                            src={card.ProductImage.Link.Href}
+                            src={ card.ProductImage.Link.Href}
                             alt={card.seo} />
                         </CardActionArea>
                         </Link>
