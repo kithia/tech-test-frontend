@@ -44,7 +44,11 @@ export default function CardDetail() {
         })
         .then((data) => {
           setCardDetail(data);
-          setCardSizes(data.AvailableSizes);
+          /**
+           * Sorts the card sizes in order of DisplayOrder
+           * and stores them 
+           *  */ 
+          setCardSizes(data.AvailableSizes.sort((a, b) => a.DisplayOrder - b.DisplayOrder));
           setIsLoading(false);
         })
         .catch((error) => {
@@ -110,7 +114,7 @@ export default function CardDetail() {
           </Grid>
 
           <Grid item sm={12} md={6} sx={{ position: 'relative' }}>
-              <Typography variant="h3" sx={{ paddingBottom: '1.5rem' }}>
+              <Typography variant="h4">
                 {cardDetail.Title}
               </Typography>
 
@@ -120,7 +124,7 @@ export default function CardDetail() {
                 </i>
               </Typography>
 
-              <p sx={{ paddingBottom: '1.5rem' }}>
+              <p sx={{ paddingBottom: '2rem' }}>
                 {cardDetail.Description}
               </p>
 
@@ -129,7 +133,7 @@ export default function CardDetail() {
                   Available sizes:
                 </Typography>
 
-                <Box sx={{ marginTop: '1rem', maxHeight: '200px', overflowY: 'auto' }}>
+                <Box sx={{ marginTop: '0.5rem', height: 'auto', overflowY: 'auto' }}>
 
                 {cardSizes.map((size) => (
                     <Box key={size.Id} sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>

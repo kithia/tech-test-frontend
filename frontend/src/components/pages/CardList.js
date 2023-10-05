@@ -75,14 +75,14 @@ export default function CardList() {
         {/**
          * Card details
          */}
-        {cards ? <Grid container spacing={2}>
+        {cards ? <Grid container spacing={6}>
 
             {cards.map((card) => (
                 <Grid item xs={12} sm={6} md={3} key={card.ProductId}>
 
                     <Card raised={true}
                         sx={{ position: 'relative', height: '307px',
-                        width: '217px' }}>
+                        width: '217px', margin: 'auto' }}>
                         <Link href={'/cards/' + card.MoonpigProductNo}>
                         <CardActionArea sx={{ bottom: '0', position: 'absolute' }}>
                             <CardMedia
