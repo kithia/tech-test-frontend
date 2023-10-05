@@ -1,5 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
+/**
+ * Custom, global theme overides
+ */
 const theme = createTheme({
   palette: {
     primary: {
@@ -11,7 +14,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'sans-serif', // Change the default font family
-  },
+  }
 });
 
 export default theme;

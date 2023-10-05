@@ -26,6 +26,14 @@ export default function CardList() {
     // Page title
     document.title = "Card Listings | Moonpig"
 
+    // Styling
+    const cardStyle = { 
+        position: 'relative', 
+        height: '307px',
+        width: '217px', 
+        m: 'auto'
+    }
+
     // Executes on load and everytime any dependacy changes
     useEffect(() => {
         // Fetches the card details from the Moonpig API
@@ -64,16 +72,16 @@ export default function CardList() {
           * Currently it assumes a 404 error.
           * If I had more time, I would identify the error
           * status, and give a more appropriate, specific 
-          * error message to the user
+          * error message to the user.
           */}
-        {isError ? <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        {isError ? <Box>
             <Typography variant="h2" gutterBottom>
                 An error has occured, please refresh the page.
             </Typography>
         </Box> : <></>}
 
         {/**
-         * Card details
+         * Card list
          */}
         {cards ? <Grid container spacing={6}>
 
@@ -81,16 +89,15 @@ export default function CardList() {
                 <Grid item xs={12} sm={6} md={3} key={card.ProductId}>
 
                     <Card raised={true}
-                        sx={{ position: 'relative', height: '307px',
-                        width: '217px', m: 'auto' }}>
-                        <Link href={'/cards/' + card.MoonpigProductNo}>
+                        sx={cardStyle}>
+                        <Link href={`/cards/${card.MoonpigProductNo}`}>
                         <CardActionArea sx={{ bottom: '0', position: 'absolute' }}>
                             <CardMedia
                             component="img"
                             height="307"
                             width="217"
                             sx={{ width: '100%', height: 'auto' }}
-                            src={ card.ProductImage.Link.Href}
+                            src={card.ProductImage.Link.Href}
                             alt={card.seo} />
                         </CardActionArea>
                         </Link>

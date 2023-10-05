@@ -32,11 +32,6 @@ export default function CardDetail() {
   const { id } = useParams();
 
   // Styling
-  const centerBoxStyle = {
-    display: 'flex',
-    justifyContent: 'center'
-  }
-
   const imageCardStyle = {
     width: '350px',
     height: 'auto',
@@ -118,7 +113,7 @@ export default function CardDetail() {
       {/** 
        * Loading circle upon component load
        */}
-      {isLoading ? <Box sx={centerBoxStyle}>
+      {isLoading ? <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress />
         </Box> : <></>}
 
@@ -128,11 +123,11 @@ export default function CardDetail() {
        * Currently it assumes a 404 error.
        * If I had more time, I would identify the error
        * status, and give a more appropriate, specific 
-       * error message to the user
+       * error message to the user.
        */}
-      {isError ? <Box sx={centerBoxStyle}>
+      {isError ? <Box>
           <Typography variant="h2" gutterBottom>
-              Sorry, it seems this item does not exist
+              Sorry, it seems this item does not exist.
           </Typography>
       </Box> : <></>}
 
@@ -146,7 +141,7 @@ export default function CardDetail() {
               <Card raised={true} sx={imageCardStyle}>
                   <CardMedia
                   component="img"
-                  src={isHovering ? cardDetail.ImageUrls[3].ImageUrl : cardDetail.ImageUrls[0].ImageUrl}
+                  src={isHovering ? cardDetail.ImageUrls[(cardDetail.ImageUrls.length - 1)].ImageUrl : cardDetail.ImageUrls[0].ImageUrl}
                   onMouseEnter={handleOnMouseEnter}
                   onMouseLeave={handleOnMouseLeave} />
               </Card>
