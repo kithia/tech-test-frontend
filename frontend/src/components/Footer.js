@@ -4,7 +4,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 
-function Copyright() {
+/**
+ * Adapted from https://github.com/mui/material-ui/tree/v5.14.11/docs/data/material/getting-started/templates/sticky-footer
+ */
+
+/**
+ * Functional component for a link to
+ * this GitHub repository
+ * @returns The JSX representation of the component
+ */
+function Repository() {
     return (
       <Typography variant="body2" color="text.secondary">
         {'Codebase avilable on '}
@@ -16,6 +25,11 @@ function Copyright() {
     );
   }
 
+/**
+ * Functional component for the footer
+ * of each web page
+ * @returns The JSX representation of the component
+ */
 function Footer() {
   return (
     <Box
@@ -33,7 +47,7 @@ function Footer() {
         <Typography variant="body1">
             Created by Kĩthia Ngigĩ
         </Typography>
-        <Copyright />
+        <Repository />
         </Container>
     </Box>
   )
