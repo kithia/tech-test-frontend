@@ -12,8 +12,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 
-import './../../styles/CardDetail.css';
-
 /**
  * Functional component for the details of a given card
  * @returns The JSX representation of the component
@@ -33,6 +31,37 @@ export default function CardDetail() {
   // MoonpigProductId taken from URL parameters
   const { id } = useParams();
 
+  // Styling
+  const centerBoxStyle = {
+    display: 'flex',
+    justifyContent: 'center'
+  }
+
+  const imageCardStyle = {
+    width: '350px',
+    height: 'auto',
+    margin: 'auto'
+  }
+
+  const priceBoxStyle = {
+    my: '0.5rem',
+    height: 'auto',
+    overflowY: 'auto'
+  }
+
+  const priceCardStyle = { display: 'flex',
+    p: '1rem',
+    justifyContent: 'space-between',
+    mb: '1rem' 
+  }
+
+  const buyButtonStyle = { 
+    bottom: 0, 
+    position: 'relative',
+    width: '17.5rem',
+    p: '1rem'
+  }
+
   // Page title
   document.title = documentTitle;
 
@@ -46,6 +75,7 @@ export default function CardDetail() {
         })
         .then((data) => {
           setCardDetail(data);
+
           /**
            * Sorts the card sizes in order of DisplayOrder
            * and stores them
@@ -70,14 +100,14 @@ export default function CardDetail() {
 }, [setCardDetail, setCardSizes, setIsLoading, setIsError, cardDetail, id])
 
   /**
-   * 
+   * Sets isHovering state to true
    */
   function handleOnMouseEnter() {
     setIsHovering(true);
   } 
 
   /**
-   * 
+   * Sets isHovering state to false
    */
   function handleOnMouseLeave() {
     setIsHovering(false);
@@ -88,7 +118,7 @@ export default function CardDetail() {
       {/** 
        * Loading circle upon component load
        */}
-      {isLoading ? <Box className="centerBox">
+      {isLoading ? <Box sx={centerBoxStyle}>
             <CircularProgress />
         </Box> : <></>}
 
@@ -100,7 +130,7 @@ export default function CardDetail() {
        * status, and give a more appropriate, specific 
        * error message to the user
        */}
-      {isError ? <Box className="centerBox">
+      {isError ? <Box sx={centerBoxStyle}>
           <Typography variant="h2" gutterBottom>
               Sorry, it seems this item does not exist
           </Typography>
@@ -111,8 +141,9 @@ export default function CardDetail() {
        */}
       {cardDetail ? <Grid container spacing={1}>
 
+          {/** Card image */}
           <Grid item sm={12} md={6} sx={{ pb: '3rem' }}>
-              <Card raised={true} sx={{ width: '350px', height: 'auto', m: 'auto' }}>
+              <Card raised={true} sx={imageCardStyle}>
                   <CardMedia
                   component="img"
                   src={isHovering ? cardDetail.ImageUrls[3].ImageUrl : cardDetail.ImageUrls[0].ImageUrl}
@@ -121,6 +152,7 @@ export default function CardDetail() {
               </Card>
           </Grid>
 
+          {/** Card text details */}
           <Grid item sm={12} md={6} sx={{ position: 'relative' }}>
               <Typography variant="h4">
                 {cardDetail.Title}
@@ -136,16 +168,16 @@ export default function CardDetail() {
                 {cardDetail.Description}
               </p>
 
+              {/** Available card sizes */}
               {cardSizes ? <div>
-                <Typography variant="h5" >
+                <Typography variant="h5" sx={{ mt: '2rem' }}>
                   Available sizes:
                 </Typography>
 
-                <Box sx={{ my: '0.5rem', height: 'auto', overflowY: 'auto' }}>
+                <Box sx={priceBoxStyle}>
 
                 {cardSizes.map((size) => (
-                    <Card variant="outlined" key={size.Id} sx={{ display: 'flex', p: '1rem',
-                    justifyContent: 'space-between', mb: '1rem' }}>
+                    <Card variant="outlined" key={size.Id} sx={priceCardStyle}>
                       <Typography variant='h5'>
                         {size.DisplayName}
                       </Typography>
@@ -159,7 +191,7 @@ export default function CardDetail() {
               </div> : <></>}
 
             <Button variant="outlined" size="large"
-            sx={{ bottom: 0, position: 'relative' }}>Buy Me</Button>
+            sx={buyButtonStyle}>Buy Me</Button>
           </Grid>
 
         </Grid> : <></>}
