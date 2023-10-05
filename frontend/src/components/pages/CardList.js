@@ -82,7 +82,7 @@ export default function CardList() {
 
                     <Card raised={true}
                         sx={{ position: 'relative', height: '307px',
-                        width: '217px', margin: 'auto' }}>
+                        width: '217px', m: 'auto' }}>
                         <Link href={'/cards/' + card.MoonpigProductNo}>
                         <CardActionArea sx={{ bottom: '0', position: 'absolute' }}>
                             <CardMedia

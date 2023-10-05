@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Footer from './Footer';
 
 /**
  * Functional component for the outermost layout
@@ -15,7 +14,7 @@ export default function Layout() {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100vh',
+          minHeight: '100vh',
         }}
       >
           {/** 
@@ -24,8 +23,6 @@ export default function Layout() {
            * component of each url path
            */}
           <Outlet />
-
-          <Footer />
           
         </Box>
       </React.Fragment>

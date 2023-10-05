@@ -46,8 +46,8 @@ export default function CardDetail() {
           setCardDetail(data);
           /**
            * Sorts the card sizes in order of DisplayOrder
-           * and stores them 
-           *  */ 
+           * and stores them
+           */ 
           setCardSizes(data.AvailableSizes.sort((a, b) => a.DisplayOrder - b.DisplayOrder));
           setIsLoading(false);
         })
@@ -103,8 +103,8 @@ export default function CardDetail() {
        */}
       {cardDetail ? <Grid container spacing={1}>
 
-          <Grid item sm={12} md={6} sx={{ paddingBottom: '3rem' }}>
-              <Card raised={true} sx={{ width: '320px', height: 'auto', margin: 'auto' }}>
+          <Grid item sm={12} md={6} sx={{ pb: '3rem' }}>
+              <Card raised={true} sx={{ width: '350px', height: 'auto', m: 'auto' }}>
                   <CardMedia
                   component="img"
                   src={isHovering ? cardDetail.ImageUrls[3].ImageUrl : cardDetail.ImageUrls[0].ImageUrl}
@@ -124,7 +124,7 @@ export default function CardDetail() {
                 </i>
               </Typography>
 
-              <p sx={{ paddingBottom: '2rem' }}>
+              <p sx={{ pb: '2rem' }}>
                 {cardDetail.Description}
               </p>
 
@@ -133,17 +133,18 @@ export default function CardDetail() {
                   Available sizes:
                 </Typography>
 
-                <Box sx={{ marginTop: '0.5rem', height: 'auto', overflowY: 'auto' }}>
+                <Box sx={{ my: '0.5rem', height: 'auto', overflowY: 'auto' }}>
 
                 {cardSizes.map((size) => (
-                    <Box key={size.Id} sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                      <Typography variant='h4'>
+                    <Card variant="outlined" key={size.Id} sx={{ display: 'flex', p: '1rem',
+                    justifyContent: 'space-between', mb: '1rem' }}>
+                      <Typography variant='h5'>
                         {size.DisplayName}
                       </Typography>
-                      <Typography variant='h4'>
+                      <Typography variant='h5'>
                         {`${size.Currency} ${size.Price}`}
                       </Typography>
-                    </Box>
+                    </Card>
                   ))}
 
                 </Box>
