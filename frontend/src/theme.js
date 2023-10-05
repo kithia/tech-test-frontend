@@ -11,9 +11,6 @@ const theme = createTheme({
     secondary: {
       main: '#06204A', // Change the secondary color
     },
-  },
-  typography: {
-    fontFamily: 'sans-serif', // Change the default font family
   }
 });
 
